@@ -1,12 +1,23 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import MainTabNavigator from "@/navigation/MainTabNavigator";
-import ModalScreen from "@/screens/ModalScreen";
 import { useScreenOptions } from "@/hooks/useScreenOptions";
 
+import CheckInScreen from "@/screens/CheckInScreen";
+import ReflectionScreen from "@/screens/ReflectionScreen";
+import VisualStateScreen from "@/screens/VisualStateScreen";
+import SettingsScreen from "@/screens/SettingsScreen";
+
 export type RootStackParamList = {
-  Main: undefined;
-  Modal: undefined;
+  CheckIn: undefined;
+  Reflection: {
+    userInput: string;
+    reflection: string;
+    metaphor: string;
+  };
+  VisualState: {
+    emotionalTone: string;
+  };
+  Settings: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -17,16 +28,32 @@ export default function RootStackNavigator() {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
-        name="Main"
-        component={MainTabNavigator}
+        name="CheckIn"
+        component={CheckInScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Modal"
-        component={ModalScreen}
-        options={{
+        name="Reflection"
+        component={ReflectionScreen}
+        options={{ 
+          headerTitle: "",
+          headerBackTitle: "Back",
+        }}
+      />
+      <Stack.Screen
+        name="VisualState"
+        component={VisualStateScreen}
+        options={{ 
+          headerShown: false,
+          presentation: "fullScreenModal",
+        }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ 
+          headerTitle: "Settings",
           presentation: "modal",
-          headerTitle: "Modal",
         }}
       />
     </Stack.Navigator>

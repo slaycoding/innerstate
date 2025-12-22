@@ -13,6 +13,7 @@ export type RootStackParamList = {
     userInput: string;
     reflection: string;
     metaphor: string;
+    emotionalTone: string;
   };
   VisualState: {
     emotionalTone: string;

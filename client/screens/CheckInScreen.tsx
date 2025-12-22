@@ -9,6 +9,7 @@ import * as Haptics from "expo-haptics";
 import { Platform } from "react-native";
 
 import { KeyboardAwareScrollViewCompat } from "@/components/KeyboardAwareScrollViewCompat";
+import { InnerVoiceText } from "@/components/InnerVoiceText";
 import { SerifText } from "@/components/SerifText";
 import { Button } from "@/components/Button";
 import { useTheme } from "@/hooks/useTheme";
@@ -102,9 +103,9 @@ export default function CheckInScreen() {
         </View>
 
         <View style={styles.promptContainer}>
-          <SerifText variant="prompt" style={{ color: theme.mutedText }}>
+          <InnerVoiceText>
             How do I feel right now?
-          </SerifText>
+          </InnerVoiceText>
         </View>
 
         <View
@@ -193,7 +194,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   promptContainer: {
-    marginBottom: Spacing["3xl"],
+    marginBottom: Spacing["4xl"],
+    paddingRight: Spacing.lg,
   },
   inputContainer: {
     borderRadius: BorderRadius.xl,

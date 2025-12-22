@@ -142,24 +142,33 @@ export const Typography = {
     fontWeight: "500" as const,
     lineHeight: 36,
   },
+  innerVoice: {
+    fontSize: 34,
+    fontWeight: "400" as const,
+    lineHeight: 46,
+    letterSpacing: -0.5,
+  },
 };
 
 export const Fonts = Platform.select({
   ios: {
     sans: "system-ui",
     serif: "Georgia",
+    serifItalic: "Georgia-Italic",
     rounded: "ui-rounded",
     mono: "ui-monospace",
   },
   default: {
     sans: "normal",
     serif: "serif",
+    serifItalic: "serif",
     rounded: "normal",
     mono: "monospace",
   },
   web: {
     sans: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
     serif: "'Playfair Display', Georgia, 'Times New Roman', serif",
+    serifItalic: "'DM Serif Display', 'Cormorant Garamond', Georgia, 'Times New Roman', serif",
     rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, sans-serif",
     mono: "'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace",
   },

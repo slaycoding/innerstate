@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
@@ -12,7 +12,20 @@ import { queryClient } from "@/lib/query-client";
 import RootStackNavigator from "@/navigation/RootStackNavigator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
+function loadWebFonts() {
+  if (Platform.OS === "web" && typeof document !== "undefined") {
+    const link = document.createElement("link");
+    link.href = "https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&family=Cormorant+Garamond:ital,wght@1,600&display=swap";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+  }
+}
+
 export default function App() {
+  useEffect(() => {
+    loadWebFonts();
+  }, []);
+
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>

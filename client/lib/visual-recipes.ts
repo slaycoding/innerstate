@@ -3,27 +3,47 @@ import { EmotionalColors } from "@/constants/theme";
 
 export type VisualType = "orbs" | "waves" | "particles" | "shards" | "rings";
 
-export type VisualRecipe = {
+export type RecipeBase = {
   primary: VisualType;
   secondary?: VisualType;
   speed: number;
   intensity: number;
-  colors: string[];
   particlePattern?: "scatter" | "rise" | "swirl";
   waveDirection?: "up" | "down";
   ringsExpanding?: boolean;
 };
 
-const recipes: Record<EmotionalFamily, VisualRecipe> = {
+export type VisualRecipe = RecipeBase & {
+  colors: string[];
+};
+
+function pickRandomColors(palette: string[], count: number = 4): string[] {
+  if (!palette || palette.length === 0) {
+    return ["#7C7CFF", "#8DD8DC", "#FFD166", "#E85D5D"];
+  }
+  const shuffled = [...palette].sort(() => Math.random() - 0.5);
+  const result: string[] = [];
+  for (let i = 0; i < count; i++) {
+    result.push(shuffled[i % shuffled.length]);
+  }
+  return result;
+}
+
+function generateColors(family: EmotionalFamily, opacities: number[]): string[] {
+  const familyColors = EmotionalColors[family];
+  if (!familyColors || !familyColors.palette) {
+    return opacities.map(op => colorWithOpacity("#7C7CFF", op));
+  }
+  const selectedColors = pickRandomColors(familyColors.palette, opacities.length);
+  return selectedColors.map((color, i) => colorWithOpacity(color, opacities[i] || 0.5));
+}
+
+const recipeConfigs: Record<EmotionalFamily, RecipeBase & { opacities: number[] }> = {
   calm: {
     primary: "orbs",
     speed: 0.7,
     intensity: 0.6,
-    colors: [
-      colorWithOpacity(EmotionalColors.calm.primary, 0.6),
-      colorWithOpacity(EmotionalColors.calm.secondary, 0.45),
-      colorWithOpacity(EmotionalColors.calm.tertiary, 0.3),
-    ],
+    opacities: [0.6, 0.5, 0.4, 0.35],
   },
   
   uplifted: {
@@ -33,11 +53,7 @@ const recipes: Record<EmotionalFamily, VisualRecipe> = {
     intensity: 0.8,
     particlePattern: "rise",
     ringsExpanding: true,
-    colors: [
-      colorWithOpacity(EmotionalColors.uplifted.primary, 0.7),
-      colorWithOpacity(EmotionalColors.uplifted.secondary, 0.55),
-      colorWithOpacity(EmotionalColors.uplifted.tertiary, 0.4),
-    ],
+    opacities: [0.7, 0.6, 0.5, 0.45],
   },
   
   heavy: {
@@ -45,11 +61,7 @@ const recipes: Record<EmotionalFamily, VisualRecipe> = {
     speed: 0.4,
     intensity: 0.5,
     waveDirection: "down",
-    colors: [
-      colorWithOpacity(EmotionalColors.heavy.primary, 0.45),
-      colorWithOpacity(EmotionalColors.heavy.secondary, 0.35),
-      colorWithOpacity(EmotionalColors.heavy.tertiary, 0.25),
-    ],
+    opacities: [0.5, 0.4, 0.35, 0.3],
   },
   
   turbulent: {
@@ -58,11 +70,7 @@ const recipes: Record<EmotionalFamily, VisualRecipe> = {
     speed: 1.5,
     intensity: 1.0,
     particlePattern: "swirl",
-    colors: [
-      colorWithOpacity(EmotionalColors.turbulent.primary, 0.65),
-      colorWithOpacity(EmotionalColors.turbulent.secondary, 0.5),
-      colorWithOpacity(EmotionalColors.turbulent.tertiary, 0.4),
-    ],
+    opacities: [0.65, 0.55, 0.5, 0.4],
   },
   
   distant: {
@@ -71,16 +79,24 @@ const recipes: Record<EmotionalFamily, VisualRecipe> = {
     speed: 0.3,
     intensity: 0.3,
     waveDirection: "up",
-    colors: [
-      colorWithOpacity(EmotionalColors.distant.primary, 0.25),
-      colorWithOpacity(EmotionalColors.distant.secondary, 0.18),
-      colorWithOpacity(EmotionalColors.distant.tertiary, 0.12),
-    ],
+    opacities: [0.3, 0.25, 0.2, 0.15],
   },
 };
 
 export function getRecipe(family: EmotionalFamily): VisualRecipe {
-  return recipes[family];
+  const config = recipeConfigs[family];
+  const colors = generateColors(family, config.opacities);
+  
+  return {
+    primary: config.primary,
+    secondary: config.secondary,
+    speed: config.speed,
+    intensity: config.intensity,
+    colors,
+    particlePattern: config.particlePattern,
+    waveDirection: config.waveDirection,
+    ringsExpanding: config.ringsExpanding,
+  };
 }
 
 export function blendRecipes(

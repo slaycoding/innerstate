@@ -91,6 +91,12 @@ function mapToFamily(token: string): EmotionalFamily | null {
   return synonymMap[token] || null;
 }
 
+const allFamilies: EmotionalFamily[] = ["calm", "uplifted", "heavy", "turbulent", "distant"];
+
+function getRandomFamily(): EmotionalFamily {
+  return allFamilies[Math.floor(Math.random() * allFamilies.length)];
+}
+
 export function resolveEmotionalState(tone: string): ResolvedState {
   const tokens = parseTokens(tone);
   const families: EmotionalFamily[] = [];
@@ -102,12 +108,12 @@ export function resolveEmotionalState(tone: string): ResolvedState {
     }
   }
   
-  // Default to calm if no recognized emotions
+  // Pick random family if no recognized emotions
   if (families.length === 0) {
     return {
-      primary: "calm",
+      primary: getRandomFamily(),
       secondary: null,
-      intensity: 0.5,
+      intensity: 0.6,
       weight: 1,
     };
   }

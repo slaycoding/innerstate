@@ -71,29 +71,19 @@ export const Spacing = {
 
 export const EmotionalColors = {
   calm: {
-    primary: "#6EC6CA",
-    secondary: "#8DD8DC",
-    tertiary: "#4FA8AC",
+    palette: ["#6EC6CA", "#8DD8DC", "#4FA8AC", "#A8E6CF", "#88D8B0", "#7FCDCD"],
   },
   uplifted: {
-    primary: "#FFD166",
-    secondary: "#FFBA42",
-    tertiary: "#FFE599",
+    palette: ["#FFD166", "#FFBA42", "#FFE599", "#FF9F45", "#FFC857", "#FFEB99", "#F9A825"],
   },
   heavy: {
-    primary: "#5B6BAA",
-    secondary: "#7A88C2",
-    tertiary: "#4A5A99",
+    palette: ["#5B6BAA", "#7A88C2", "#4A5A99", "#6C5B7B", "#8E7CC3", "#5C6BC0", "#7986CB"],
   },
   turbulent: {
-    primary: "#E85D5D",
-    secondary: "#FF7E7E",
-    tertiary: "#CC4A4A",
+    palette: ["#E85D5D", "#FF7E7E", "#CC4A4A", "#FF6B6B", "#F06292", "#EF5350", "#FF8A65"],
   },
   distant: {
-    primary: "#8B8BA3",
-    secondary: "#A3A3B8",
-    tertiary: "#6E6E88",
+    palette: ["#8B8BA3", "#A3A3B8", "#6E6E88", "#9E9E9E", "#B0BEC5", "#78909C", "#90A4AE"],
   },
 };
 

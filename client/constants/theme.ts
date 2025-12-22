@@ -1,30 +1,57 @@
 import { Platform } from "react-native";
 
-const tintColorLight = "#007AFF";
-const tintColorDark = "#0A84FF";
-
 export const Colors = {
   light: {
-    text: "#11181C",
+    text: "#EDEDF2",
+    mutedText: "#9A9AA8",
     buttonText: "#FFFFFF",
-    tabIconDefault: "#687076",
-    tabIconSelected: tintColorLight,
-    link: "#007AFF",
-    backgroundRoot: "#FFFFFF", // Elevation 0
-    backgroundDefault: "#F2F2F2", // Elevation 1
-    backgroundSecondary: "#E6E6E6", // Elevation 2
-    backgroundTertiary: "#D9D9D9", // Elevation 3
+    tabIconDefault: "#9A9AA8",
+    tabIconSelected: "#7C7CFF",
+    link: "#7C7CFF",
+    backgroundRoot: "#0F0F14",
+    backgroundDefault: "#1A1A22",
+    backgroundSecondary: "#15151D",
+    backgroundTertiary: "#1C1C26",
+    primary: "#7C7CFF",
+    primaryText: "#FFFFFF",
+    secondary: "#15151D",
+    secondaryText: "#EDEDF2",
+    accent: "#7C7CFF",
+    accentText: "#FFFFFF",
+    destructive: "#FF6B6B",
+    destructiveText: "#0F0F14",
+    card: "#15151D",
+    cardText: "#EDEDF2",
+    popover: "#1C1C26",
+    popoverText: "#EDEDF2",
+    focusBorder: "#7C7CFF",
+    inputBorder: "#2A2A38",
   },
   dark: {
-    text: "#ECEDEE",
+    text: "#EDEDF2",
+    mutedText: "#9A9AA8",
     buttonText: "#FFFFFF",
-    tabIconDefault: "#9BA1A6",
-    tabIconSelected: tintColorDark,
-    link: "#0A84FF",
-    backgroundRoot: "#1F2123", // Elevation 0
-    backgroundDefault: "#2A2C2E", // Elevation 1
-    backgroundSecondary: "#353739", // Elevation 2
-    backgroundTertiary: "#404244", // Elevation 3
+    tabIconDefault: "#9A9AA8",
+    tabIconSelected: "#7C7CFF",
+    link: "#7C7CFF",
+    backgroundRoot: "#0F0F14",
+    backgroundDefault: "#1A1A22",
+    backgroundSecondary: "#15151D",
+    backgroundTertiary: "#1C1C26",
+    primary: "#7C7CFF",
+    primaryText: "#FFFFFF",
+    secondary: "#15151D",
+    secondaryText: "#EDEDF2",
+    accent: "#7C7CFF",
+    accentText: "#FFFFFF",
+    destructive: "#FF6B6B",
+    destructiveText: "#0F0F14",
+    card: "#15151D",
+    cardText: "#EDEDF2",
+    popover: "#1C1C26",
+    popoverText: "#EDEDF2",
+    focusBorder: "#7C7CFF",
+    inputBorder: "#2A2A38",
   },
 };
 
@@ -39,67 +66,71 @@ export const Spacing = {
   "4xl": 40,
   "5xl": 48,
   inputHeight: 48,
-  buttonHeight: 52,
+  buttonHeight: 56,
 };
 
 export const BorderRadius = {
   xs: 8,
   sm: 12,
-  md: 18,
-  lg: 24,
-  xl: 30,
-  "2xl": 40,
-  "3xl": 50,
+  md: 16,
+  lg: 20,
+  xl: 24,
+  "2xl": 28,
+  "3xl": 32,
   full: 9999,
 };
 
 export const Typography = {
   h1: {
-    fontSize: 32,
-    lineHeight: 40,
+    fontSize: 28,
     fontWeight: "700" as const,
   },
   h2: {
-    fontSize: 28,
-    lineHeight: 36,
-    fontWeight: "700" as const,
+    fontSize: 24,
+    fontWeight: "600" as const,
   },
   h3: {
-    fontSize: 24,
-    lineHeight: 32,
+    fontSize: 20,
     fontWeight: "600" as const,
   },
   h4: {
-    fontSize: 20,
-    lineHeight: 28,
-    fontWeight: "600" as const,
+    fontSize: 18,
+    fontWeight: "500" as const,
   },
   body: {
     fontSize: 16,
-    lineHeight: 24,
     fontWeight: "400" as const,
   },
   small: {
     fontSize: 14,
-    lineHeight: 20,
     fontWeight: "400" as const,
   },
   link: {
     fontSize: 16,
-    lineHeight: 24,
+    fontWeight: "500" as const,
+  },
+  reflection: {
+    fontSize: 22,
     fontWeight: "400" as const,
+    lineHeight: 35,
+  },
+  metaphor: {
+    fontSize: 17,
+    fontWeight: "400" as const,
+    lineHeight: 28,
+  },
+  prompt: {
+    fontSize: 26,
+    fontWeight: "500" as const,
+    lineHeight: 36,
   },
 };
 
 export const Fonts = Platform.select({
   ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
     sans: "system-ui",
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: "ui-serif",
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
+    serif: "Georgia",
     rounded: "ui-rounded",
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
     mono: "ui-monospace",
   },
   default: {
@@ -109,10 +140,9 @@ export const Fonts = Platform.select({
     mono: "monospace",
   },
   web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded:
-      "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+    sans: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+    serif: "'Playfair Display', Georgia, 'Times New Roman', serif",
+    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, sans-serif",
+    mono: "'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace",
   },
 });

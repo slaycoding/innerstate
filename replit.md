@@ -39,6 +39,25 @@ Preferred communication style: Simple, everyday language.
 - `Card` - Elevated container with spring animations
 - `KeyboardAwareScrollViewCompat` - Cross-platform keyboard handling
 
+**Emotional Visualization System:**
+The VisualState screen displays distinct animated visuals based on emotional tone detected by AI:
+
+- **Emotion Taxonomy** (`lib/emotion-map.ts`): Maps tone strings to 5 emotional families with synonym support:
+  - Calm (peaceful, serene, relaxed, content)
+  - Uplifted (hopeful, happy, joyful, optimistic)
+  - Heavy (sad, melancholic, grieving, down)
+  - Turbulent (anxious, stressed, overwhelmed)
+  - Distant (numb, tired, disconnected, empty)
+
+- **Visual Primitives** (`components/visuals/`):
+  - OrbField: Gentle floating orbs (calm states)
+  - WaveLayer: Horizontal fog bands (heavy/distant states)
+  - ParticleSwarm: Rising/swirling particles (uplifted/turbulent)
+  - ShardCluster: Angular rotating shards (turbulent states)
+  - PulseRing: Expanding rings (uplifted states)
+
+- **Recipe System** (`lib/visual-recipes.ts`): Each emotional family has distinct visual characteristics including shapes, animation speed, intensity, and theme-derived colors
+
 ### Backend Architecture
 
 **Framework:** Express.js server running on Node.js with TypeScript.

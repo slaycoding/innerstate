@@ -1,4 +1,5 @@
 import { EmotionalFamily, colorWithOpacity } from "./emotion-map";
+import { EmotionalColors } from "@/constants/theme";
 
 export type VisualType = "orbs" | "waves" | "particles" | "shards" | "rings";
 
@@ -7,18 +8,10 @@ export type VisualRecipe = {
   secondary?: VisualType;
   speed: number;
   intensity: number;
-  colorStrategy: (theme: ThemeColors) => string[];
+  colors: string[];
   particlePattern?: "scatter" | "rise" | "swirl";
   waveDirection?: "up" | "down";
   ringsExpanding?: boolean;
-};
-
-type ThemeColors = {
-  primary: string;
-  accent: string;
-  backgroundDefault: string;
-  backgroundRoot: string;
-  mutedText: string;
 };
 
 const recipes: Record<EmotionalFamily, VisualRecipe> = {
@@ -26,10 +19,10 @@ const recipes: Record<EmotionalFamily, VisualRecipe> = {
     primary: "orbs",
     speed: 0.7,
     intensity: 0.6,
-    colorStrategy: (theme) => [
-      colorWithOpacity(theme.primary, 0.5),
-      colorWithOpacity(theme.accent, 0.35),
-      colorWithOpacity(theme.backgroundDefault, 0.2),
+    colors: [
+      colorWithOpacity(EmotionalColors.calm.primary, 0.6),
+      colorWithOpacity(EmotionalColors.calm.secondary, 0.45),
+      colorWithOpacity(EmotionalColors.calm.tertiary, 0.3),
     ],
   },
   
@@ -40,10 +33,10 @@ const recipes: Record<EmotionalFamily, VisualRecipe> = {
     intensity: 0.8,
     particlePattern: "rise",
     ringsExpanding: true,
-    colorStrategy: (theme) => [
-      colorWithOpacity(theme.primary, 0.6),
-      colorWithOpacity(theme.accent, 0.5),
-      colorWithOpacity(theme.primary, 0.4),
+    colors: [
+      colorWithOpacity(EmotionalColors.uplifted.primary, 0.7),
+      colorWithOpacity(EmotionalColors.uplifted.secondary, 0.55),
+      colorWithOpacity(EmotionalColors.uplifted.tertiary, 0.4),
     ],
   },
   
@@ -52,10 +45,10 @@ const recipes: Record<EmotionalFamily, VisualRecipe> = {
     speed: 0.4,
     intensity: 0.5,
     waveDirection: "down",
-    colorStrategy: (theme) => [
-      colorWithOpacity(theme.mutedText, 0.3),
-      colorWithOpacity(theme.backgroundDefault, 0.25),
-      colorWithOpacity(theme.mutedText, 0.2),
+    colors: [
+      colorWithOpacity(EmotionalColors.heavy.primary, 0.45),
+      colorWithOpacity(EmotionalColors.heavy.secondary, 0.35),
+      colorWithOpacity(EmotionalColors.heavy.tertiary, 0.25),
     ],
   },
   
@@ -65,10 +58,10 @@ const recipes: Record<EmotionalFamily, VisualRecipe> = {
     speed: 1.5,
     intensity: 1.0,
     particlePattern: "swirl",
-    colorStrategy: (theme) => [
-      colorWithOpacity(theme.primary, 0.6),
-      colorWithOpacity(theme.accent, 0.5),
-      colorWithOpacity(theme.primary, 0.4),
+    colors: [
+      colorWithOpacity(EmotionalColors.turbulent.primary, 0.65),
+      colorWithOpacity(EmotionalColors.turbulent.secondary, 0.5),
+      colorWithOpacity(EmotionalColors.turbulent.tertiary, 0.4),
     ],
   },
   
@@ -78,10 +71,10 @@ const recipes: Record<EmotionalFamily, VisualRecipe> = {
     speed: 0.3,
     intensity: 0.3,
     waveDirection: "up",
-    colorStrategy: (theme) => [
-      colorWithOpacity(theme.mutedText, 0.15),
-      colorWithOpacity(theme.backgroundDefault, 0.12),
-      colorWithOpacity(theme.mutedText, 0.08),
+    colors: [
+      colorWithOpacity(EmotionalColors.distant.primary, 0.25),
+      colorWithOpacity(EmotionalColors.distant.secondary, 0.18),
+      colorWithOpacity(EmotionalColors.distant.tertiary, 0.12),
     ],
   },
 };
@@ -102,7 +95,7 @@ export function blendRecipes(
     secondary: secondary.primary,
     speed: primary.speed * weight + secondary.speed * (1 - weight),
     intensity: primary.intensity * weight + secondary.intensity * (1 - weight),
-    colorStrategy: primary.colorStrategy,
+    colors: primary.colors,
     particlePattern: primary.particlePattern || secondary.particlePattern,
     waveDirection: primary.waveDirection || secondary.waveDirection,
     ringsExpanding: primary.ringsExpanding ?? secondary.ringsExpanding,

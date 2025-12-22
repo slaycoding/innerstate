@@ -69,6 +69,34 @@ export const Spacing = {
   buttonHeight: 56,
 };
 
+export const EmotionalColors = {
+  calm: {
+    primary: "#6EC6CA",
+    secondary: "#8DD8DC",
+    tertiary: "#4FA8AC",
+  },
+  uplifted: {
+    primary: "#FFD166",
+    secondary: "#FFBA42",
+    tertiary: "#FFE599",
+  },
+  heavy: {
+    primary: "#5B6BAA",
+    secondary: "#7A88C2",
+    tertiary: "#4A5A99",
+  },
+  turbulent: {
+    primary: "#E85D5D",
+    secondary: "#FF7E7E",
+    tertiary: "#CC4A4A",
+  },
+  distant: {
+    primary: "#8B8BA3",
+    secondary: "#A3A3B8",
+    tertiary: "#6E6E88",
+  },
+};
+
 export const BorderRadius = {
   xs: 8,
   sm: 12,

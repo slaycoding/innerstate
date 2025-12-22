@@ -1,10 +1,9 @@
 import React, { useMemo } from "react";
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import * as Haptics from "expo-haptics";
-import { Platform } from "react-native";
 
 import { ThemedText } from "@/components/ThemedText";
 import { useTheme } from "@/hooks/useTheme";
@@ -31,25 +30,14 @@ export default function VisualStateScreen() {
 
   const emotionalTone = route.params?.emotionalTone || "calm";
   
-  const { recipe, colors } = useMemo(() => {
+  const recipe = useMemo(() => {
     const state = resolveEmotionalState(emotionalTone);
     const primaryRecipe = getRecipe(state.primary);
     const secondaryRecipe = state.secondary ? getRecipe(state.secondary) : null;
-    const blendedRecipe = blendRecipes(primaryRecipe, secondaryRecipe, state.weight);
-    
-    const themeColors = {
-      primary: theme.primary,
-      accent: theme.accent,
-      backgroundDefault: theme.backgroundDefault,
-      backgroundRoot: theme.backgroundRoot,
-      mutedText: theme.mutedText,
-    };
-    
-    return {
-      recipe: blendedRecipe,
-      colors: blendedRecipe.colorStrategy(themeColors),
-    };
-  }, [emotionalTone, theme]);
+    return blendRecipes(primaryRecipe, secondaryRecipe, state.weight);
+  }, [emotionalTone]);
+
+  const colors = recipe.colors;
 
   const handleDismiss = () => {
     if (Platform.OS !== "web") {

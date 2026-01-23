@@ -34,7 +34,14 @@ export default function CheckInScreen() {
 
   const reflectionMutation = useMutation({
     mutationFn: async (userInput: string): Promise<ReflectionResponse> => {
+      console.log("MUTATION STARTED WITH:", userInput);
+
       const response = await apiRequest("POST", "/api/reflect", { input: userInput });
+      console.log("API RESPONSE STATUS:", response.status);
+
+      const json=await response.json();
+      console.log("API RESPONSE JSON:", json);
+
       return response.json();
     },
     onSuccess: (data) => {
@@ -49,7 +56,9 @@ export default function CheckInScreen() {
       });
       setInput("");
     },
-    onError: () => {
+    onError: (error) => {
+      console.log("REFLECTION ERROR:", error);
+
       if (Platform.OS !== "web") {
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       }
@@ -57,6 +66,8 @@ export default function CheckInScreen() {
   });
 
   const handleReflect = () => {
+    console.log("BUTTON PRESSED, INPUT:", input);
+
     if (input.trim().length > 0) {
       if (Platform.OS !== "web") {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);

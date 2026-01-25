@@ -159,7 +159,6 @@ function serveLandingPage({
 function configureExpoAndLanding(app: express.Application) {
   const templatePath = path.resolve(
     process.cwd(),
-    "server",
     "templates",
     "landing-page.html",
   );
@@ -194,9 +193,7 @@ function configureExpoAndLanding(app: express.Application) {
     next();
   });
 
-  app.use("/assets", express.static(path.resolve(process.cwd(), "assets")));
-  app.use(express.static(path.resolve(process.cwd(), "static-build")));
-
+  
   log("Expo routing: Checking expo-platform header on / and /manifest");
 }
 

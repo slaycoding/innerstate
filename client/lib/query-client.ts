@@ -1,11 +1,11 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
 /**
- * Gets the base URL for the Express API server (e.g., "http://localhost:3000")
+ * Gets the base URL for the Express API server (e.g., "https://stillness.onrender.com")
  * @returns {string} The API base URL
  */
 export function getApiUrl(): string {
-  const url = "http://10.0.2.2:3000";
+  const url = "https://stillness.onrender.com";
   console.log("API BASE URL:", url);
   return url;
 }
